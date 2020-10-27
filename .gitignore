@@ -1,3 +1,4 @@
 discord_env/
 .env
 .vscode/
+*.pyc
