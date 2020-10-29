@@ -21,3 +21,8 @@ class Date:
 
     def __gt__(self, other):
         return (self.year, self.month, self.day) > (other.year, other.month, other.day)
+
+    def __str__(self):
+        return "{:02d}/{:02d}/{:04d}".format(
+            self.month, self.day, self.year
+        )

@@ -38,6 +38,12 @@ class TestDateComparisons(unittest.TestCase):
         self.assertGreaterEqual(date_two, date_two)
         self.assertGreaterEqual(date_two, date_one)
 
+    def test_str(self):
+        date = Date(day=1, month=2, year=2010)
+        date_str = "02/01/2010"
+
+        self.assertEqual(str(date), date_str)
+
 
 if __name__ == "__main__":
     unittest.main()

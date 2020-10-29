@@ -1,6 +1,5 @@
-from dataclasses import dataclass
-
-
-@dataclass
 class View:
-    pass
+
+    @staticmethod
+    def show_meetings(meetings):
+        return "\n".join(str(meetings))
