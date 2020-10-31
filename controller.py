@@ -1,22 +1,20 @@
 from dataclasses import dataclass
-
-
-from models.calendar import Calendar
-from models.date import Date
+from models.expense_tracker import ExpenseTracker
 from view import View
 
 
 @dataclass
 class Controller:
-    model: Calendar
+    model: ExpenseTracker
     view: View
 
-    def create_meeting(self)
+    def pay_user(self, caller: str, receiver: str, amount: int):
+        self.model.pay_user(caller=caller, receiver=receiver, amount=amount)
+        return self.view.display_pay_user(
+            caller=caller, receiver=receiver, amount=amount)
 
-    def show_day_meetings(self, current_day: Date):
-        meetings = self.model.get_meetings_within_range(
-            start_of_week=current_day,
-            end_of_week=current_day
-        )
-
-        return self.view.show_meetings(meetings=meetings)
+    def request_user(self, caller: str, receiver: str, amount: int):
+        self.model.request_user(
+            caller=caller, receiver=receiver, amount=amount)
+        return self.view.display_request_user(
+            caller=caller, receiver=receiver, amount=amount)
