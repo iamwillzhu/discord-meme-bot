@@ -22,7 +22,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith("!Atlas"):
+    if message.content.startswith(f'!{client.user.name}'):
         random_meme = Meme.create_random_meme(message.author.display_name)
         response = random_meme.generate_file()
         await message.channel.send(file=discord.File(response))
