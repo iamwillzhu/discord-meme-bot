@@ -2,3 +2,4 @@ discord_env/
 .env
 .vscode/
 *.pyc
+generated-memes/

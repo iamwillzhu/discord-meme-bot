@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from PIL import Image, ImageFont, ImageDraw
 from utils import random_caption, random_image_url
 
@@ -12,7 +13,8 @@ class Meme:
         self.caption = caption
         self.image_url = image_url
 
-    # TODO: figure out how to format the image
+    # TODO: sometimes the caption isn't properly formatted in the middle
+    # TODO: Figure out how to make multiline captions
 
     def generate_file(self) -> str:
         dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -30,6 +32,12 @@ class Meme:
             top_text_size = font.getsize(self.name)
             bottom_text_size = font.getsize(self.caption)
 
+            while top_text_size[0] > size[0] - 20 or bottom_text_size[0] > size[0] - 20:
+                font_size = font_size - 1
+                font = ImageFont.truetype("impact.ttf", font_size)
+                top_text_size = font.getsize(self.name)
+                bottom_text_size = font.getsize(self.caption)
+
             top_text_position_x = (size[0] / 2) - (top_text_size[0] / 2)
             top_text_position_y = 0
             top_text_position = (top_text_position_x, top_text_position_y)
@@ -43,7 +51,8 @@ class Meme:
             edit.text(bottom_text_position, self.caption,
                       (255, 255, 255), font=font)
 
-            generated_meme_file_path = generated_memes_dir_path + '/meme.jpg'
+            generated_meme_file_path = generated_memes_dir_path + \
+                f'/meme-{datetime.now()}.jpg'
 
             image.save(generated_meme_file_path)
 

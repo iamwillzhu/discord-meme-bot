@@ -1,8 +1,8 @@
 import os
 import discord
 
-from datetime import datetime
 from dotenv import load_dotenv
+from meme import Meme
 
 
 load_dotenv()
@@ -23,8 +23,9 @@ async def on_message(message):
         return
 
     if message.content.startswith("!Atlas"):
-        response = datetime.now()
-        await message.channel.send(response)
+        random_meme = Meme.create_random_meme(message.author.display_name)
+        response = random_meme.generate_file()
+        await message.channel.send(file=discord.File(response))
 
 
 client.run(TOKEN)
